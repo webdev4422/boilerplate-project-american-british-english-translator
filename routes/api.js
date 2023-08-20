@@ -22,11 +22,11 @@ module.exports = function (app) {
       return res.json({ error: 'Required field(s) missing' })
     }
 
-    // Translate to British/American
+    // Translate to British
     if (locale == 'american-to-british') {
       translation = translator.translateToBritish(text)
     }
-    //TODO handle Everything looks good to me in translate to American
+    // Translate to American
     if (locale == 'british-to-american') {
       translation = translator.translateToAmerican(text)
     }

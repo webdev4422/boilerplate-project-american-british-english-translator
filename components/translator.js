@@ -5,7 +5,7 @@ const britishOnly = require('./british-only.js')
 
 class Translator {
   translateToBritish(text) {
-    let textX = text.split(' ')
+    let textX = text.split(/([,.\s])/)
     let lengthX = textX.length // Keep length separate, cuz infinity loop
 
     for (let i = 0; i < lengthX; i++) {
@@ -31,7 +31,7 @@ class Translator {
       }
     }
 
-    textX = textX.join(' ')
+    textX = textX.join('')
 
     // Check if text was translated and start with upper case
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
@@ -42,7 +42,7 @@ class Translator {
   }
 
   translateToAmerican(text) {
-    let textX = text.split(' ')
+    let textX = text.split(/([,.\s])/)
     let lengthX = textX.length
 
     for (let i = 0; i < lengthX; i++) {
@@ -78,7 +78,7 @@ class Translator {
       })
     }
 
-    textX = textX.join(' ')
+    textX = textX.join('')
 
     // Check if text was translated and start with upper case
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
