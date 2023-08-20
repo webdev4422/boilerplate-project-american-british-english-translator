@@ -33,6 +33,7 @@ class Translator {
 
     textX = textX.join(' ')
 
+    // Check if text was translated and start with upper case
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
       return 'Everything looks good to me!'
     }
