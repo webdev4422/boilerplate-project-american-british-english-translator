@@ -96,6 +96,14 @@ class Translator {
       textX = textX.replace(regex, `<span class="highlight">${value}</span>`)
     }
 
+    // Handle special time FUCK!
+    let specialRegex = /([0-1]?[0-9]|2[0-3]).[0-5][0-9]/
+    if (textX.match(specialRegex)) {
+      let tmp = textX.match(specialRegex)[0]
+      tmp = tmp.replace('.', ':')
+      textX = textX.replace(specialRegex, `<span class="highlight">${tmp}</span>`)
+    }
+
     // Check if text was translated and start with upper case
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
       return 'Everything looks good to me!'
