@@ -19,8 +19,8 @@ module.exports = function (app) {
     if (!text) {
       return res.json({ error: 'No text to translate' })
     }
-    // Failed:If text requires no translation, return "Everything looks good to me!" for the translation value.
-    // {"text":"color","translation":"<span class=\"highlight\">colour</span>"}
-    res.end()
+
+    const translation = translator.translate(text)
+    return res.json({ text: text, translation: translation })
   })
 }
