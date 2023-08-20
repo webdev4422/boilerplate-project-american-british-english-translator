@@ -73,21 +73,26 @@ class Translator {
         let translation = `<span class=\"highlight\">${time}</span>`
         textX.splice(i, 1, translation)
       }
-
-      // Handle title
-      Object.keys(americanToBritishTitles).forEach((key) => {
-        if (americanToBritishTitles[key] == textX[i].toLowerCase()) {
-          let objKey = Object.keys(americanToBritishTitles).find(
-            (key) => americanToBritishTitles[key] === textX[i].toLowerCase()
-          )
-          let title = objKey.at(0).toUpperCase() + objKey.slice(1, 2)
-          let translation = `<span class=\"highlight\">${title}</span>`
-          textX.splice(i, 1, translation)
-        }
-      })
     }
-
     textX = textX.join('')
+
+    // Handle title
+    textX = textX.split(' ')
+    for (let i = 0; i < textX.length; i++) {
+      for (const [key, value] of Object.entries(americanToBritishTitles)) {
+        // const regex = new RegExp(`\\b${key}\\b`, 'gi')
+        if (textX[i].toLowerCase().match(value)) {
+          textX[i] = `<span class="highlight">${key[0].toUpperCase() + key.slice(1, 2)}</span>`
+        }
+      }
+    }
+    textX = textX.join(' ')
+
+    // Handle british only
+    for (const [key, value] of Object.entries(britishOnly)) {
+      const regex = new RegExp(`\\b${key}\\b`, 'gi')
+      textX = textX.replace(regex, `<span class="highlight">${value}</span>`)
+    }
 
     // Check if text was translated and start with upper case
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
