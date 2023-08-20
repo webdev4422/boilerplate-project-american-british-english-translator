@@ -81,8 +81,10 @@ class Translator {
     for (let i = 0; i < textX.length; i++) {
       for (const [key, value] of Object.entries(americanToBritishTitles)) {
         // const regex = new RegExp(`\\b${key}\\b`, 'gi')
-        if (textX[i].toLowerCase().match(value)) {
-          textX[i] = `<span class="highlight">${key[0].toUpperCase() + key.slice(1, 2)}</span>`
+        if (textX[i].toLowerCase().match(value) && textX[i].toLowerCase() == value) {
+          textX[i] = `<span class="highlight">${
+            key[0].toUpperCase() + key.slice(1, -1) + '.'
+          }</span>`
         }
       }
     }
