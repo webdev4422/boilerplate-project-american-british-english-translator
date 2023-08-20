@@ -21,17 +21,22 @@ class Translator {
         let translation = `<span class=\"highlight\">${time}</span>`
         textX.splice(i, 1, translation)
       }
+    }
+    textX = textX.join('')
 
-      // Handle title
-      if (americanToBritishTitles.hasOwnProperty(textX[i].toLowerCase())) {
-        let title = americanToBritishTitles[textX[i].toLowerCase()]
-        title = title.at(0).toUpperCase() + title.slice(1, 2)
-        let translation = `<span class=\"highlight\">${title}</span>`
-        textX.splice(i, 1, translation)
+    // Handle title
+    textX = textX.split(' ')
+    for (let i = 0; i < textX.length; i++) {
+      for (const [key, value] of Object.entries(americanToBritishTitles)) {
+        // const regex = new RegExp(`\\b${key}\\b`, 'gi')
+        if (textX[i].toLowerCase().match(key)) {
+          textX[i] = `<span class="highlight">${value[0].toUpperCase() + value.slice(1, 2)}</span>`
+        }
       }
     }
+    textX = textX.join(' ')
 
-    textX = textX.join('')
+    // TODO handle  american/british only
 
     // Check if text was translated and start with upper case
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
