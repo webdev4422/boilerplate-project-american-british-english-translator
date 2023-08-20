@@ -26,7 +26,7 @@ module.exports = function (app) {
     if (locale == 'american-to-british') {
       translation = translator.translateToBritish(text)
     }
-
+    //TODO handle Everything looks good to me in translate to American
     if (locale == 'british-to-american') {
       translation = translator.translateToAmerican(text)
     }
