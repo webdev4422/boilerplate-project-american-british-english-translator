@@ -14,14 +14,12 @@ module.exports = function (app) {
       return res.json({ error: 'No text to translate' })
     }
 
-    if (locale != 'american-to-british' && locale != 'british-to-american') {
-      return res.json({ error: 'Invalid value for locale field' })
-    }
-
     if (!locale || !text) {
       return res.json({ error: 'Required field(s) missing' })
     }
-
+    if (locale != 'american-to-british' && locale != 'british-to-american') {
+      return res.json({ error: 'Invalid value for locale field' })
+    }
     // Translate to British
     if (locale == 'american-to-british') {
       translation = translator.translateToBritish(text)
