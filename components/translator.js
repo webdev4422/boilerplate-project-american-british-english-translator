@@ -4,7 +4,7 @@ const americanToBritishTitles = require('./american-to-british-titles.js')
 const britishOnly = require('./british-only.js')
 
 class Translator {
-  translate(text) {
+  translateToBritish(text) {
     let textX = text.split(' ')
     let lengthX = textX.length // Keep length separate, cuz infinity loop
 

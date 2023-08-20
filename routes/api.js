@@ -7,7 +7,9 @@ module.exports = function (app) {
 
   app.route('/api/translate').post((req, res) => {
     const { locale, text } = req.body
+    let translation
 
+    // Check errors
     if (text === '') {
       return res.json({ error: 'No text to translate' })
     }
@@ -20,7 +22,15 @@ module.exports = function (app) {
       return res.json({ error: 'Required field(s) missing' })
     }
 
-    const translation = translator.translate(text)
+    // Translate to British/American
+    if (locale == 'american-to-british') {
+      translation = translator.translateToBritish(text)
+    }
+
+    if (locale == 'british-to-american') {
+      translation = translator.translateToAmerican(text)
+    }
+
     return res.json({ text: text, translation: translation })
   })
 }
