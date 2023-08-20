@@ -36,7 +36,11 @@ class Translator {
     }
     textX = textX.join(' ')
 
-    // TODO handle  american/british only
+    // Handle american only
+    for (const [key, value] of Object.entries(americanOnly)) {
+      const regex = new RegExp(`\\b${key}\\b`, 'gi')
+      textX = textX.replace(regex, `<span class="highlight">${value}</span>`)
+    }
 
     // Check if text was translated and start with upper case
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
