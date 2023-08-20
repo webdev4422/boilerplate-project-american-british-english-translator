@@ -9,11 +9,20 @@ class Translator {
     let lengthX = textX.length // Keep length separate, cuz infinity loop
 
     for (let i = 0; i < lengthX; i++) {
+      // Handle spelling
       if (americanToBritishSpelling.hasOwnProperty(textX[i])) {
         let translation = `<span class=\"highlight\">${americanToBritishSpelling[textX[i]]}</span>`
         textX.splice(i, 1, translation)
       }
+
+      // Handle time
+      if (/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(textX[i])) {
+        let time = textX[i].split(':').join('.')
+        let translation = `<span class=\"highlight\">${time}</span>`
+        textX.splice(i, 1, translation)
+      }
     }
+
     textX = textX.join(' ')
 
     if (text == textX && text.at(0) == text.at(0).toUpperCase()) {
