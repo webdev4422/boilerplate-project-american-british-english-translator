@@ -21,6 +21,14 @@ class Translator {
         let translation = `<span class=\"highlight\">${time}</span>`
         textX.splice(i, 1, translation)
       }
+
+      // Handle title
+      if (americanToBritishTitles.hasOwnProperty(textX[i].toLowerCase())) {
+        let title = americanToBritishTitles[textX[i].toLowerCase()]
+        title = title.at(0).toUpperCase() + title.slice(1, 2)
+        let translation = `<span class=\"highlight\">${title}</span>`
+        textX.splice(i, 1, translation)
+      }
     }
 
     textX = textX.join(' ')
